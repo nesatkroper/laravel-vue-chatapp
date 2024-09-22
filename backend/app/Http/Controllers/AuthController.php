@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
@@ -77,19 +78,26 @@ class AuthController extends Controller
         ], 200);
     }
 
-    public function changePhoto(Request $request, $id)
+    public function changeProfile(Request $request, $id)
     {
         $user = User::findOrFail($id);
-        $path = null;
+        $path = $user->photo;
 
         if ($request->hasFile('photo')) {
+            $old = public_path('user/' . $path);
+            File::delete($old);
             $img = $request->file('photo');
             $path = 'user' . time() . '.' . $img->getClientOriginalExtension();
             $img->move(public_path('user'), $path);
         }
 
         $user->update([
-            'photo' => $path
+            'photo' => $path,
+            'name' => $request->name,
+            'bio' => $request->bio,
+            'gender' => $request->gender,
+            'phone' => $request->phone,
+            'dob' => $request->dob
         ]);
 
         return response()->json($user);

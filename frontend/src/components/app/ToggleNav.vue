@@ -15,4 +15,7 @@
   <RouterLink to="/contact" class="block px-4 py-2 text-black hover:bg-gray-600"
     >Contact</RouterLink
   >
+  <RouterLink to="/setting" class="block px-4 py-2 text-black hover:bg-gray-600"
+    >Setting</RouterLink
+  >
 </template>

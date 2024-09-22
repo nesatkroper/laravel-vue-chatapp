@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 
 const router = useRouter();
 const auth: any = ref<Auth[]>([]);
@@ -103,9 +104,7 @@ const handleRegister = async () => {
               <Button type="submit">Register</Button>
             </div>
           </form>
-          <span class="text-muted-foreground px-0">
-            OR ALREADY HAVE ACCOUNT
-          </span>
+          <Separator label="OR ALREADY HAVE ACCOUNT" />
           <div class="grid w-full items-center gap-1.5 text-center my-4">
             <Button @click="navigateToLogin" class="bg-gray-400">
               Login

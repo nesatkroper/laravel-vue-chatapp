@@ -14,6 +14,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
+import { Separator } from "@/components/ui/separator";
 
 const router = useRouter();
 const auth: any = ref<Auth[]>([]);
@@ -89,7 +90,7 @@ const handleLogin = async () => {
               <Button type="submit">Login</Button>
             </div>
           </form>
-          <span class="text-muted-foreground px-0"> DON'T HAVE ACCOUNT </span>
+          <Separator label="DON'T HAVE ACCOUNT" />
           <div class="grid w-full items-start gap-1.5 text-start my-4">
             <Button @click="navigateToRegister" class="bg-gray-400">
               Register

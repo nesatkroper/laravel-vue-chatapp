@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import axios from "@/config/axios";
 import type { Auth } from "@/types/Auth";
-import profile from "@/assets/images/profile.jpg";
 import { useRouter } from "vue-router";
 import ThemeToggle from "@/components/app/ThemeToggle.vue";
 import { components } from "@/components/utils/components";
@@ -24,6 +23,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import baseUrl from "@/stores/baseUrl";
 
 const router = useRouter();
 const user: any = ref<Auth[]>([]);
@@ -37,7 +37,6 @@ const logout = async () => {
 const getAuth = async () => {
   const response = await axios.get("/user");
   user.value = response.data;
-  console.log(user.value.name);
 };
 
 onMounted(() => {
@@ -84,15 +83,15 @@ onMounted(() => {
   <DropdownMenu>
     <DropdownMenuTrigger>
       <Avatar>
-        <AvatarImage :src="profile" alt="@radix-vue" />
+        <AvatarImage :src="`${baseUrl}user/${user.photo}`" alt="@radix-vue" />
         <AvatarFallback>My Profile</AvatarFallback>
       </Avatar>
     </DropdownMenuTrigger>
-    <DropdownMenuContent>
+    <DropdownMenuContent class="shadow-2xl">
       <DropdownMenuLabel>{{ user.name }}</DropdownMenuLabel>
       <DropdownMenuSeparator />
       <DropdownMenuItem>
-        <router-link to="/profile">Profile</router-link>
+        <router-link to="/setting">Profile</router-link>
       </DropdownMenuItem>
       <DropdownMenuItem>Billing</DropdownMenuItem>
       <DropdownMenuItem>

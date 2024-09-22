@@ -21,6 +21,7 @@ const toggleMenu = () => {
       </div>
 
       <div class="hidden lg:flex space-x-4">
+        <!--  -->
         <Navigation />
       </div>
       <button @click="toggleMenu" class="lg:hidden text-black">
@@ -41,6 +42,7 @@ const toggleMenu = () => {
       </button>
     </div>
     <div v-show="isMenuOpen" class="lg:hidden bg-white">
+      <!--  -->
       <ToggleNav />
     </div>
   </nav>

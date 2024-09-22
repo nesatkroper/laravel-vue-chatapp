@@ -14,7 +14,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', [AuthController::class, 'userProfile']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::prefix('/user')->group(function () {
-        Route::put('/photo', [AuthController::class, 'changePhoto']);
+        Route::put('/profile/{id}', [AuthController::class, 'changeProfile']);
     });
 });
 
