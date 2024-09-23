@@ -37,9 +37,10 @@ import { cn } from "@/lib/utils";
 const df = new DateFormatter("en-US", {
   dateStyle: "long",
 });
+
 const user: any = ref<Auth[]>([]);
-user.value.dob = ref<DateValue>();
 const selectFile = ref("");
+const datetime = ref<DateValue>();
 
 const getAuth = async () => {
   const response = await axios.get("/user");
@@ -48,7 +49,7 @@ const getAuth = async () => {
 
 const handleFileChange = (event: any) => {
   const file = event.target.files[0];
-  user.value.photo = file;
+  selectFile.value = file;
 
   if (file) {
     const reader = new FileReader();
@@ -62,7 +63,7 @@ const handleFileChange = (event: any) => {
 };
 
 const handleUpdateProfile = async (id: number) => {
-  if (!user.value.photo) {
+  if (!selectFile.value) {
     alert("Please select a photo to create.");
     return;
   } else {
@@ -70,12 +71,12 @@ const handleUpdateProfile = async (id: number) => {
       await axios.post(
         `/user/profile/${id}`,
         {
-          photo: selectFile,
+          photo: selectFile.value,
           name: user.value.name,
           bio: user.value.bio,
           gender: user.value.gender,
           phone: user.value.phone,
-          dob: user.value.dob,
+          dob: datetime.value,
         },
         {
           withCredentials: false,
@@ -166,7 +167,7 @@ onMounted(() => {
           <Input v-model="user.phone" />
         </div>
         <div class="space-y-1 mb-2 flex flex-col">
-          <Label>Date of Birth </Label>
+          <Label>Date of Birth : {{ user.dob }}</Label>
           <Popover>
             <PopoverTrigger as-child>
               <Button
@@ -174,20 +175,20 @@ onMounted(() => {
                 :class="
                   cn(
                     'w-full justify-start text-left font-normal',
-                    !user.dob && 'text-muted-foreground'
+                    !datetime && 'text-muted-foreground'
                   )
                 "
               >
                 <CalendarIcon class="mr-2 h-4 w-4" />
                 {{
-                  user.dob
-                    ? df.format(user.dob.toDate(getLocalTimeZone()))
+                  datetime
+                    ? df.format(datetime.toDate(getLocalTimeZone()))
                     : "Pick a date"
                 }}
               </Button>
             </PopoverTrigger>
             <PopoverContent class="w-auto p-0">
-              <Calendar v-model="user.dob" initial-focus />
+              <Calendar v-model="datetime" initial-focus />
             </PopoverContent>
           </Popover>
         </div>

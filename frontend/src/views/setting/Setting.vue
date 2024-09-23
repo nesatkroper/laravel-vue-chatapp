@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Layout from "@/components/app/Layout.vue";
 import Profile from "./components/Profile.vue";
-import Password from "./components/Password.vue";
+import Account from "./components/Account.vue";
 import {
   Card,
   CardContent,
@@ -39,7 +39,10 @@ import { Separator } from "@/components/ui/separator";
                 <!--  -->
                 <Profile />
               </TabsContent>
-              <TabsContent value="password"> <Password /> </TabsContent>
+              <TabsContent value="password">
+                <!--  -->
+                <Account />
+              </TabsContent>
             </div>
           </Tabs>
         </CardContent>

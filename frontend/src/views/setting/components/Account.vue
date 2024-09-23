@@ -15,9 +15,9 @@ import { Input } from "@/components/ui/input";
 <template>
   <Card>
     <CardHeader>
-      <CardTitle>Password</CardTitle>
+      <CardTitle>Account</CardTitle>
       <CardDescription>
-        Change your password here. After saving, you'll be logged out.
+        Change your account setting here. After saving, you'll be logged out.
       </CardDescription>
     </CardHeader>
     <CardContent class="space-y-2">

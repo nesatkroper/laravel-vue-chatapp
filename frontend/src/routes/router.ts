@@ -28,6 +28,7 @@ const routes = [
     path: "/:pathMatch(.*)*",
     component: NotFound,
     name: "404",
+    meta: { requiresAuth: true },
   },
 ];
 
