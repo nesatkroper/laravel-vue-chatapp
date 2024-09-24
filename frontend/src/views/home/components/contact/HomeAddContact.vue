@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import axios from "@/config/axios";
 import type { ContactList } from "@/types/ContactList";
+import type { Auth } from "@/types/Auth";
 import {
   DialogClose,
   DialogContent,
@@ -14,21 +15,34 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const contact: any = ref<ContactList[]>([]);
+const user: any = ref<Auth[]>([]);
 
 const handleAddContact = async () => {
-  if (contact.value.phone == undefined || contact.value.nickname == undefined) {
-    alert("Please enter a phone number");
-  } else {
-    try {
-      const response = await axios.post("/contact.add", {
-        //
-      });
-      console.log(contact.value.phone);
-    } catch (e) {
-      console.error(e);
+  try {
+    const response = await axios.post("/contact/add", {
+      usr_id: user.value.id,
+      phone: contact.value.phone,
+      nickname: contact.value.nickname,
+    });
+
+    if (response.status == 200) {
+      console.log(response.data);
+      contact.value = [];
     }
+  } catch (e) {
+    console.log(e);
+    alert(e);
   }
 };
+
+const getAuth = async () => {
+  const response = await axios.get("/user");
+  user.value = response?.data ?? [];
+};
+
+onMounted(() => {
+  getAuth();
+});
 </script>
 
 <template>
@@ -60,7 +74,6 @@ const handleAddContact = async () => {
               type="text"
               placeholder="nickname"
             />
-            <p>{{ contact.nickname }}</p>
           </div>
         </DialogDescription>
       </DialogHeader>

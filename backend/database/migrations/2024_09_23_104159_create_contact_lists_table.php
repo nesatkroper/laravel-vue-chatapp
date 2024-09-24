@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('contact_lists', function (Blueprint $table) {
             $table->id('ctl_id');
+            $table->integer('usr_id');
             $table->integer('contact_id');
             $table->string('nickname')->nullable()->unique();
+            $table->string('phone')->unique();
             $table->string('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('is_delete', ['true', 'false'])->default('false');

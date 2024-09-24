@@ -17,6 +17,8 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+
+
     protected $fillable = [
         'photo',
         'name',
@@ -50,5 +52,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public  function contact_list()
+    {
+        return $this->belongsTo(ContactList::class);
     }
 }

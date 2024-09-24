@@ -16,8 +16,7 @@ const user: any = ref<Auth[]>([]);
 
 const getAuth = async () => {
   const response = await axios.get("/user");
-  user.value = response.data;
-  console.log(user.value.name);
+  user.value = response?.data ?? [];
 };
 
 onMounted(() => {
@@ -29,9 +28,9 @@ onMounted(() => {
   <Layout>
     <Sheet>
       <div class="flex">
-        <div class="w-[70px] h-[90vh] bg-gray-200">
+        <div class="w-[70px] h-[90vh] bg-gray-300">
           <SheetTrigger>
-            <Button class="bg-gray-400 w-[60px] mt-4 mx-[5px]">
+            <Button class="w-[60px] mt-4 mx-[5px]">
               <AlignJustify class="w-6 h-6" />
             </Button>
           </SheetTrigger>

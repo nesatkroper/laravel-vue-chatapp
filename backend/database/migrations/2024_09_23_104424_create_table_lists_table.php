@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("tb_id");
             $table->integer('member_id_1');
             $table->integer('member_id_2');
-            $table->string('table_name')->nullable();
+            $table->string('table_name')->unique();
             $table->string('description')->nullable();
             $table->enum('status', ['active', 'inactive'])->default('active');
             $table->enum('is_delete', ['true', 'false'])->default('false');

@@ -13,10 +13,16 @@ class ContactList extends Model
 
     protected $fillable = [
         'contact_id',
+        'usr_id',
         'nickname',
         'phone',
         'description',
         'status',
         'is_delete'
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class, 'id', 'contact_id');
+    }
 }

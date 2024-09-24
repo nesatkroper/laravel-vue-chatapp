@@ -33,6 +33,12 @@ const clear = () => {
   auth.value.password = null;
 };
 
+const getAuth = async () => {
+  const response = await axios.get("/user");
+  auth.value = response?.data;
+  localStorage.setItem("id", response.data.id);
+};
+
 const handleLogin = async () => {
   if (auth.value.email == undefined || auth.value.password == undefined) {
     alert("Error: Please enter a valid email and password");
@@ -43,6 +49,7 @@ const handleLogin = async () => {
         password: auth.value.password,
       });
       localStorage.setItem("auth_token", response.data.access_token);
+      getAuth();
       router.push("/");
     } catch (err: any) {
       alert("Error: " + err);

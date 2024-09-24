@@ -9,17 +9,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import baseUrl from "@/stores/baseUrl";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import {
   DateFormatter,
   type DateValue,
@@ -150,17 +144,16 @@ onMounted(() => {
         </div>
         <div class="space-y-1 mb-2">
           <Label>Gender </Label>
-          <Select>
-            <SelectTrigger>
-              <SelectValue :placeholder="user.gender" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup>
-                <SelectItem value="male"> Male </SelectItem>
-                <SelectItem value="female"> Female </SelectItem>
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <RadioGroup v-model="user.gender" default-value="male">
+            <div class="flex items-center space-x-2">
+              <RadioGroupItem id="r1" value="male" />
+              <Label for="r1">Male</Label>
+            </div>
+            <div class="flex items-center space-x-2">
+              <RadioGroupItem id="r2" value="female" />
+              <Label for="r2">Female</Label>
+            </div>
+          </RadioGroup>
         </div>
         <div class="space-y-1 mb-2">
           <Label>Phone </Label>

@@ -31,6 +31,7 @@ const user: any = ref<Auth[]>([]);
 const logout = async () => {
   await axios.post("/logout");
   localStorage.removeItem("auth_token");
+  localStorage.removeItem("id");
   router.push("/login");
 };
 
